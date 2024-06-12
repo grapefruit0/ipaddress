@@ -148,6 +148,12 @@ def ip_address(address):
           address
 
     """
+    # added by yongzheng for python3 bytes (python2 string) to unicode 
+    if isinstance(address, str):
+		address = address.decode("utf-8")
+    elif isinstance(address, int) or isinstance(address, unicode):
+        pass
+
     try:
         return IPv4Address(address)
     except (AddressValueError, NetmaskValueError):
@@ -184,6 +190,45 @@ def ip_network(address, strict=True):
           address. Or if the network has host bits set.
 
     """
+    # TODO: comment `take an IP string/int` sould modify to 
+    #               `take an IP unicode/int`
+
+    """
+    # added by yongzheng for check address type
+    print("before address.decode(\"utf-8\") command")
+    print(address)
+    print(type(address))
+    if isinstance(address, unicode):
+		print("the type of address is unicode")
+    if isinstance(address, bytes):
+		print("the type of address is bytes")
+    if isinstance(address, str):
+		print("the type of address is string")
+    if isinstance(address, int):
+		print("the type of address is int")
+    """
+
+    # added by yongzheng for python3 bytes (python2 string) to unicode 
+    if isinstance(address, str):
+		address = address.decode("utf-8")
+    elif isinstance(address, int) or isinstance(address, unicode):
+        pass
+
+    """
+    # added by yongzheng for check address type
+    print("after address.decode(\"utf-8\") command")
+    print(address)
+    print(type(address))
+    if isinstance(address, unicode):
+		print("the type of address is unicode")
+    if isinstance(address, bytes):
+		print("the type of address is bytes")
+    if isinstance(address, str):
+		print("the type of address is string")
+    if isinstance(address, int):
+		print("the type of address is int")
+    """
+
     try:
         return IPv4Network(address, strict)
     except (AddressValueError, NetmaskValueError):
